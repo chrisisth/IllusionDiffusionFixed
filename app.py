@@ -234,43 +234,17 @@ with gr.Blocks() as app:
         inputs=[prompt, control_image],
         queue=False
     ).success(
-        convert_to_pil,
-        inputs=[control_image],
-        outputs=[state_img_input],
-        queue=False,
-        preprocess=False,
-    ).success(
         inference,
-        inputs=[state_img_input, prompt, negative_prompt, guidance_scale, controlnet_conditioning_scale, control_start, control_end, strength, seed, sampler],
-        outputs=[state_img_output, result_image, share_group, used_seed]
-    ).success(
-        convert_to_base64,
-        inputs=[state_img_output],
-        outputs=[result_image],
-        queue=False,
-        postprocess=False
-    )
+        inputs=[control_image, prompt, negative_prompt, guidance_scale, controlnet_conditioning_scale, control_start, control_end, strength, seed, sampler],
+        outputs=[result_image, result_image, share_group, used_seed]
     run_btn.click(
         check_inputs,
         inputs=[prompt, control_image],
         queue=False
     ).success(
-        convert_to_pil,
-        inputs=[control_image],
-        outputs=[state_img_input],
-        queue=False,
-        preprocess=False,
-    ).success(
         inference,
-        inputs=[state_img_input, prompt, negative_prompt, guidance_scale, controlnet_conditioning_scale, control_start, control_end, strength, seed, sampler],
-        outputs=[state_img_output, result_image, share_group, used_seed]
-    ).success(
-        convert_to_base64,
-        inputs=[state_img_output],
-        outputs=[result_image],
-        queue=False,
-        postprocess=False
-    )
+        inputs=[control_image, prompt, negative_prompt, guidance_scale, controlnet_conditioning_scale, control_start, control_end, strength, seed, sampler],
+        outputs=[result_image, result_image, share_group, used_seed]
     share_button.click(None, [], [], js=share_js)
 
 with gr.Blocks(css=css) as app_with_history:
