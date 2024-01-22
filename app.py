@@ -15,6 +15,7 @@ from diffusers import (
     DPMSolverMultistepScheduler,  # <-- Added import
     EulerDiscreteScheduler  # <-- Added import
 )
+import tempfile
 import time
 from share_btn import community_icon_html, loading_icon_html, share_js
 import user_history
@@ -99,12 +100,13 @@ def check_inputs(prompt: str, control_image: Image.Image):
         raise gr.Error("Prompt is required")
 
 def convert_to_pil(base64_image):
-    pil_image = processing_utils.decode_base64_to_image(base64_image)
+    pil_image = Image.open(base64_image)
     return pil_image
 
 def convert_to_base64(pil_image):
-    base64_image = processing_utils.encode_pil_to_base64(pil_image)
-    return base64_image
+    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as temp_file:
+        image.save(temp_file.name)
+    return temp_file.name
 
 # Inference function
 @spaces.GPU
