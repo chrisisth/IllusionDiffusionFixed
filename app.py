@@ -1,3 +1,4 @@
+import spaces
 import torch
 import gradio as gr
 from gradio import processing_utils, utils
@@ -106,6 +107,7 @@ def convert_to_base64(pil_image):
     return base64_image
 
 # Inference function
+@spaces.GPU
 def inference(
     control_image: Image.Image,
     prompt: str,
@@ -267,7 +269,7 @@ with gr.Blocks() as app:
         queue=False,
         postprocess=False
     )
-    share_button.click(None, [], [], _js=share_js)
+    share_button.click(None, [], [], js=share_js)
 
 with gr.Blocks(css=css) as app_with_history:
     with gr.Tab("Demo"):
