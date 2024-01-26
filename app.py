@@ -41,6 +41,7 @@ main_pipe = StableDiffusionControlNetPipeline.from_pretrained(
 #model_id = "stabilityai/sd-x2-latent-upscaler"
 image_pipe = StableDiffusionControlNetImg2ImgPipeline(**main_pipe.components)
 
+
 #image_pipe.unet = torch.compile(image_pipe.unet, mode="reduce-overhead", fullgraph=True)
 #upscaler = StableDiffusionLatentUpscalePipeline.from_pretrained(model_id, torch_dtype=torch.float16)
 #upscaler.to("cuda")
