@@ -10,6 +10,7 @@ pinned: false
 license: openrail
 hf_oauth: true
 disable_embedding: true
+short_description: Generate stunning high quality illusion artwork
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
