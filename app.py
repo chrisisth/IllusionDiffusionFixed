@@ -22,7 +22,7 @@ from share_btn import community_icon_html, loading_icon_html, share_js
 import user_history
 from illusion_style import css
 import os
-from transformers import CLIPFeatureExtractor
+from transformers import CLIPImageProcessor
 from safety_checker import StableDiffusionSafetyChecker
 
 BASE_MODEL = "SG161222/Realistic_Vision_V5.1_noVAE"
@@ -34,15 +34,17 @@ controlnet = ControlNetModel.from_pretrained("monster-labs/control_v1p_sd15_qrco
 # Initialize the safety checker conditionally
 SAFETY_CHECKER_ENABLED = os.environ.get("SAFETY_CHECKER", "0") == "1"
 safety_checker = None
+feature_extractor = None
 if SAFETY_CHECKER_ENABLED:
     safety_checker = StableDiffusionSafetyChecker.from_pretrained("CompVis/stable-diffusion-safety-checker").to("cuda")
-    feature_extractor = CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32")
+    feature_extractor = CLIPImageProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 main_pipe = StableDiffusionControlNetPipeline.from_pretrained(
     BASE_MODEL,
     controlnet=controlnet,
     vae=vae,
     safety_checker=safety_checker,
+    feature_extractor=feature_extractor,
     torch_dtype=torch.float16,
 ).to("cuda")
 
@@ -57,7 +59,7 @@ def check_nsfw_images(images: list[Image.Image]) -> tuple[list[Image.Image], lis
         return images, has_nsfw_concepts
     else:
         return images, [False] * len(images)
-
+        
 #main_pipe.unet = torch.compile(main_pipe.unet, mode="reduce-overhead", fullgraph=True)
 #main_pipe.unet.to(memory_format=torch.channels_last)
 #main_pipe.unet = torch.compile(main_pipe.unet, mode="reduce-overhead", fullgraph=True)
