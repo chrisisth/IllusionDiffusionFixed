@@ -13,26 +13,31 @@ from diffusers import (
     StableDiffusionLatentUpscalePipeline,
     StableDiffusionImg2ImgPipeline,
     StableDiffusionControlNetImg2ImgPipeline,
-    DPMSolverMultistepScheduler,  # <-- Added import
-    EulerDiscreteScheduler, # <-- Added import (5/13)
-    StableDiffusionSafetyChecker# <-- Added import
+    DPMSolverMultistepScheduler,
+    EulerDiscreteScheduler
 )
 import tempfile
 import time
 from share_btn import community_icon_html, loading_icon_html, share_js
 import user_history
 from illusion_style import css
+import os
+from transformers import CLIPFeatureExtractor
+from safety_checker import StableDiffusionSafetyChecker
 
 BASE_MODEL = "SG161222/Realistic_Vision_V5.1_noVAE"
 
 # Initialize both pipelines
 vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16)
+controlnet = ControlNetModel.from_pretrained("monster-labs/control_v1p_sd15_qrcode_monster", torch_dtype=torch.float16)
 
-# Initialize the safety checker
-safety_checker = StableDiffusionSafetyChecker.from_pretrained("CompVis/stable-diffusion-safety-checker")
+# Initialize the safety checker conditionally
+SAFETY_CHECKER_ENABLED = os.environ.get("SAFETY_CHECKER", "0") == "1"
+safety_checker = None
+if SAFETY_CHECKER_ENABLED:
+    safety_checker = StableDiffusionSafetyChecker.from_pretrained("CompVis/stable-diffusion-safety-checker").to("cuda")
+    feature_extractor = CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32")
 
-#init_pipe = DiffusionPipeline.from_pretrained("SG161222/Realistic_Vision_V5.1_noVAE", torch_dtype=torch.float16)
-controlnet = ControlNetModel.from_pretrained("monster-labs/control_v1p_sd15_qrcode_monster", torch_dtype=torch.float16)#, torch_dtype=torch.float16)
 main_pipe = StableDiffusionControlNetPipeline.from_pretrained(
     BASE_MODEL,
     controlnet=controlnet,
@@ -40,6 +45,18 @@ main_pipe = StableDiffusionControlNetPipeline.from_pretrained(
     safety_checker=safety_checker,
     torch_dtype=torch.float16,
 ).to("cuda")
+
+# Function to check NSFW images
+def check_nsfw_images(images: list[Image.Image]) -> tuple[list[Image.Image], list[bool]]:
+    if SAFETY_CHECKER_ENABLED:
+        safety_checker_input = feature_extractor(images, return_tensors="pt").to("cuda")
+        has_nsfw_concepts = safety_checker(
+            images=[images],
+            clip_input=safety_checker_input.pixel_values.to("cuda")
+        )
+        return images, has_nsfw_concepts
+    else:
+        return images, [False] * len(images)
 
 #main_pipe.unet = torch.compile(main_pipe.unet, mode="reduce-overhead", fullgraph=True)
 #main_pipe.unet.to(memory_format=torch.channels_last)
