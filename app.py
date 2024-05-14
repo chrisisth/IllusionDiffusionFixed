@@ -37,7 +37,7 @@ main_pipe = StableDiffusionControlNetPipeline.from_pretrained(
     BASE_MODEL,
     controlnet=controlnet,
     vae=vae,
-    safety_checker=safety_checker
+    safety_checker=safety_checker,
     torch_dtype=torch.float16,
 ).to("cuda")
 
