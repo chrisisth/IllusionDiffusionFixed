@@ -4,6 +4,7 @@ import gradio as gr
 from gradio import processing_utils, utils
 from PIL import Image
 import random
+
 from diffusers import (
     DiffusionPipeline,
     AutoencoderKL,
@@ -13,7 +14,8 @@ from diffusers import (
     StableDiffusionImg2ImgPipeline,
     StableDiffusionControlNetImg2ImgPipeline,
     DPMSolverMultistepScheduler,  # <-- Added import
-    EulerDiscreteScheduler  # <-- Added import
+    EulerDiscreteScheduler, # <-- Added import (5/13)
+    StableDiffusionSafetyChecker# <-- Added import
 )
 import tempfile
 import time
