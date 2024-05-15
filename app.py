@@ -23,7 +23,7 @@ import user_history
 from illusion_style import css
 import os
 from transformers import CLIPImageProcessor
-from safety_checker import StableDiffusionSafetyChecker #-> commenting this out to provoke runtime error
+from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
 
 BASE_MODEL = "SG161222/Realistic_Vision_V5.1_noVAE"
 
@@ -49,16 +49,16 @@ main_pipe = StableDiffusionControlNetPipeline.from_pretrained(
 ).to("cuda")
 
 # Function to check NSFW images
-def check_nsfw_images(images: list[Image.Image]) -> tuple[list[Image.Image], list[bool]]:
-    if SAFETY_CHECKER_ENABLED:
-        safety_checker_input = feature_extractor(images, return_tensors="pt").to("cuda")
-        has_nsfw_concepts = safety_checker(
-            images=[images],
-            clip_input=safety_checker_input.pixel_values.to("cuda")
-        )
-        return images, has_nsfw_concepts
-    else:
-        return images, [False] * len(images)
+#def check_nsfw_images(images: list[Image.Image]) -> tuple[list[Image.Image], list[bool]]:
+#    if SAFETY_CHECKER_ENABLED:
+#        safety_checker_input = feature_extractor(images, return_tensors="pt").to("cuda")
+#        has_nsfw_concepts = safety_checker(
+#            images=[images],
+#            clip_input=safety_checker_input.pixel_values.to("cuda")
+#        )
+#        return images, has_nsfw_concepts
+#    else:
+#        return images, [False] * len(images)
         
 #main_pipe.unet = torch.compile(main_pipe.unet, mode="reduce-overhead", fullgraph=True)
 #main_pipe.unet.to(memory_format=torch.channels_last)
