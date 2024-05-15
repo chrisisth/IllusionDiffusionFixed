@@ -223,13 +223,15 @@ with gr.Blocks() as app:
         <center><h1>Illusion Diffusion HQ 🌀</h1></span>  
         <span font-size:16px;">Generate stunning high quality illusion artwork with Stable Diffusion</span>  
         </center>
- 
-        A space by AP [Follow me on Twitter](https://twitter.com/angrypenguinPNG) with big contributions from [multimodalart](https://twitter.com/multimodalart)
 
+        Illusion Diffusion is back up with a safety checker! Because I have been asked, If you would like to support me, consider using [deforum.studio](https://deforum.studio)
+
+        A space by AP [Follow me on Twitter](https://twitter.com/angrypenguinPNG) with big contributions from [multimodalart](https://twitter.com/multimodalart)
         This project works by using [Monster Labs QR Control Net](https://huggingface.co/monster-labs/control_v1p_sd15_qrcode_monster).
         Given a prompt and your pattern, we use a QR code conditioned controlnet to create a stunning illusion! Credit to: [MrUgleh](https://twitter.com/MrUgleh) for discovering the workflow :)
         '''
     )
+
     state_img_input = gr.State()
     state_img_output = gr.State()
     with gr.Row():
