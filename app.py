@@ -220,15 +220,18 @@ def inference(
 with gr.Blocks() as app:
     gr.Markdown(
         '''
-        <center><h1>Illusion Diffusion HQ 🌀</h1></span>  
-        <span font-size:16px;">Generate stunning high quality illusion artwork with Stable Diffusion</span>  
-        </center>
-
-        Illusion Diffusion is back up with a safety checker! Because I have been asked, If you would like to support me, consider using [deforum.studio](https://deforum.studio)
-
-        A space by AP [Follow me on Twitter](https://twitter.com/angrypenguinPNG) with big contributions from [multimodalart](https://twitter.com/multimodalart)
-        This project works by using [Monster Labs QR Control Net](https://huggingface.co/monster-labs/control_v1p_sd15_qrcode_monster).
-        Given a prompt and your pattern, we use a QR code conditioned controlnet to create a stunning illusion! Credit to: [MrUgleh](https://twitter.com/MrUgleh) for discovering the workflow :)
+        <div style="text-align: center;">
+            <h1>Illusion Diffusion HQ 🌀</h1>
+            <span style="font-size:16px;">Generate stunning high quality illusion artwork with Stable Diffusion</span>
+            <br><br>
+            Illusion Diffusion is back up with a safety checker! Because I have been asked, If you would like to support me, consider using <a href="https://deforum.studio">deforum.studio</a>
+            <br><br>
+            Deforum Studio creates really cool visuals with GenAI and we are releasing a cool feature soon ;)
+            <br><br>
+            A space by AP <a href="https://twitter.com/angrypenguinPNG">Follow me on Twitter</a> with big contributions from <a href="https://twitter.com/multimodalart">multimodalart</a>
+            <br><br>
+            This project works by using <a href="https://huggingface.co/monster-labs/control_v1p_sd15_qrcode_monster">Monster Labs QR Control Net</a>. Given a prompt and your pattern, we use a QR code conditioned controlnet to create a stunning illusion! Credit to: <a href="https://twitter.com/MrUgleh">MrUgleh</a> for discovering the workflow :)
+        </div>
         '''
     )
 
