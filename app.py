@@ -23,7 +23,7 @@ import user_history
 from illusion_style import css
 import os
 from transformers import CLIPImageProcessor
-# from safety_checker import StableDiffusionSafetyChecker -> commenting this out to provoke runtime error
+from safety_checker import StableDiffusionSafetyChecker #-> commenting this out to provoke runtime error
 
 BASE_MODEL = "SG161222/Realistic_Vision_V5.1_noVAE"
 
