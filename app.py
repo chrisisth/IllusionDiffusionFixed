@@ -224,7 +224,6 @@ with gr.Blocks() as app:
             <h1>Illusion Diffusion HQ 🌀</h1>
             <p style="font-size:16px;">Generate stunning high quality illusion artwork with Stable Diffusion</p>
             <p>Illusion Diffusion is back up with a safety checker! Because I have been asked, if you would like to support me, consider using <a href="https://deforum.studio">deforum.studio</a></p>
-            <p>Deforum Studio creates really cool visuals with GenAI and we are releasing a cool feature soon ;)</p>
             <p>A space by AP <a href="https://twitter.com/angrypenguinPNG">Follow me on Twitter</a> with big contributions from <a href="https://twitter.com/multimodalart">multimodalart</a></p>
             <p>This project works by using <a href="https://huggingface.co/monster-labs/control_v1p_sd15_qrcode_monster">Monster Labs QR Control Net</a>. Given a prompt and your pattern, we use a QR code conditioned controlnet to create a stunning illusion! Credit to: <a href="https://twitter.com/MrUgleh">MrUgleh</a> for discovering the workflow :)</p>
         </div>
