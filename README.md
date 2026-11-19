@@ -1,3 +1,20 @@
+Run with:
+
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+cd .\IllusionDiffusion
+
+    py -m venv .venv  
+    .\.venv\Scripts\Activate.ps1  
+    cd .\IllusionDiffusion  
+
+    python -m pip install --upgrade pip  
+    python -m pip install -r requirements.txt  
+    python -m pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126  
+    python -m pip install gradio==6.14.0 spaces  
+    python app.py
+
+
 ---
 title: IllusionDiffusion
 emoji: 👁
