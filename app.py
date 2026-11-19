@@ -1,3 +1,8 @@
+import os
+
+if os.name == "nt":
+    os.environ.setdefault("HF_DEACTIVATE_ASYNC_LOAD", "1")
+
 import spaces
 import torch
 import gradio as gr
@@ -15,7 +20,6 @@ from diffusers import (
 import time
 from share_btn import community_icon_html, loading_icon_html, share_js
 from illusion_style import css
-import os
 from transformers import CLIPImageProcessor
 from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
 
