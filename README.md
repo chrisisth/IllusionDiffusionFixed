@@ -1,9 +1,5 @@
 Run with:
 
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-cd .\IllusionDiffusion
-
     py -m venv .venv  
     .\.venv\Scripts\Activate.ps1  
     cd .\IllusionDiffusion  
