@@ -1,3 +1,5 @@
+Original project by [AP123 on Hugging Face](https://huggingface.co/spaces/AP123/IllusionDiffusion) — many thanks for creating and sharing IllusionDiffusion.
+
 Run with:
 
     py -m venv .venv  
